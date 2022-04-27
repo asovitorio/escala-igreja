@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model File {
+  id String @id @default(uuid())
+  path String 
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  file Member?
+  @@map("files")
+}
+model Member {
+  id        String     @id @default(uuid())
+  name      String
+  tephone   String
+  email     String
+  status    Boolean    @default(true)
+  file_id String
+  file File @relation(fields: [file_id],references: [id],onDelete: Cascade)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  user      User?
+  post      Schedule[]
+
+  @@map("members")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  login     String   @unique
+  password  String
+  status    Boolean
+  member_id String   @unique
+  members   Member   @relation(fields: [member_id], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Post {
+  id          String     @id @default(uuid())
+  title       String
+  description String     @db.Text
+  initials    String
+  member      Schedule[]
+ task        Task[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@map("posts")
+}
+
+model Task {
+  id        String   @id @default(uuid())
+  task      String   @db.Text
+  post_id   String
+  post      Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("tasks")
+}
+
+model Schedule {
+  id         String   @id @default(uuid())
+  data       DateTime
+  member_id  String
+  member     Member   @relation(fields: [member_id], references: [id], onDelete: Cascade)
+  post_id    String
+  post       Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@map("schedules")
+}
