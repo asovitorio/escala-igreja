@@ -29,6 +29,27 @@ const membersController = {
       return res.status(401).json(error.message);
       
     }
+  },
+  update: async(req: Request,res:Response) =>{
+    try {
+    const member = await memberService.update(req.body)
+      return res.status(200).json(member);
+    } catch (error) {
+      if(error instanceof Error)
+      return res.status(400).json(error.message);
+      
+    }
+  },
+  delete: async(req: Request,res:Response) =>{
+    try {
+      const member = await memberService.delete(req.body.id)
+      return res.status(200).json(member);
+    } catch (error) {
+      if(error instanceof Error)
+      return res.status(400).json(error.message);
+      
+    }
+
   }
 };
 

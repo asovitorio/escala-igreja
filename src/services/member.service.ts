@@ -47,7 +47,7 @@ const memberService = {
   },
   create: async (body: IMember) => {
     if (Object.keys(body).length < 3)
-      throw new Error("Impossivel Cadastrar! verifique os dados");
+      throw new Error("Impossible Cadastrar! verify the data");
 
     const memberIfNotExists = await prisma.member.findFirst({
       where: {
@@ -67,8 +67,44 @@ const memberService = {
         },
       },
     });
-    if (!member) throw new Error("Erro ao cadastrar o membro!");
+    if (!member) throw new Error("Error registering members!");
     return member;
+  },
+  update: async function (body: IMember) {
+    console.log(body.status);
+    const member = await this.findById(String(body.id));
+    const response = await prisma.member.update({
+      where: {
+        id: body.id,
+      },
+      data: {
+        name: body.name ? body.name : member.name,
+        email: body.email ? body.email : member.email,
+        tephone: body.telephone ? body.telephone : member.tephone,
+        status: body.status,
+        file: {
+          update: {
+            path: body.path ? body.path : member.file.path,
+          },
+        },
+      },
+    });
+    if (!response) throw new Error("Error in updating members!");
+    return response;
+  },
+  delete: async function (id: string) {
+    const member = await this.findById(id);
+    const memberDelete = await prisma.member.delete({
+      where: {
+        id,
+      },
+    });
+    const fileDelete = await prisma.file.delete({
+      where: {
+        id: member.file_id,
+      },
+    });
+    return { memberDelete,fileDelete };
   },
 };
 export { memberService };

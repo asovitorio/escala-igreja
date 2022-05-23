@@ -2,10 +2,10 @@
 
 export interface IUser {
    id:string;
-   name:string; 
    login:string;
    password:string;
    status:boolean;
+   member_id:string;
 } 
 
 export interface IUsers {
