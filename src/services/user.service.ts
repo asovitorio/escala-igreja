@@ -1,6 +1,6 @@
 import { prisma } from "../prisma";
 import { IUser } from "../interfaces/IUser";
-import { IUsers } from "../interfaces/IUser";
+
 import bcrypt from "bcrypt";
 
 const userService = {
