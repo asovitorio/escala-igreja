@@ -36,7 +36,7 @@ const userController = {
   },
   delete: async (req: Request, res: Response) => {
     try {
-      const user = await userService.delete(req.body.id)
+      const user = await userService.delete(req.body.id);
       return res.status(200).json(user);
     } catch (error) {
       if (error instanceof Error) return res.status(400).json(error.message);

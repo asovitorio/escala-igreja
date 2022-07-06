@@ -9,19 +9,19 @@ import path from 'path';
 dotenv.config();
 
 const app = express();
-const urlApi = process.env.END_POINT_API;
+const baseUrl = process.env.END_POINT_API;
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.use(express.json())
 app.use(express.static(path.join('src','uploads')))
-app.use(`/${urlApi}`,userRoutes)
-app.use(`/${urlApi}`,membersRoutes)
-app.use(`/${urlApi}`,postRoutes)
-app.use(`/${urlApi}`,taskRoutes)
+app.use(`/${baseUrl}`,userRoutes)
+app.use(`/${baseUrl}`,membersRoutes)
+app.use(`/${baseUrl}`,postRoutes)
+app.use(`/${baseUrl}`,taskRoutes)
 app.get('/',(req,res) =>{
     res.send({api:'esta api está funcionando corretamente!'})
 })
-console.log(path.join('src','uploads'));
+
 
 
 export default app
