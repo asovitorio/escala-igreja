@@ -1,5 +1,6 @@
 import { prisma } from "../prisma";
 import { IMember } from "../interfaces/IMembers";
+import  fs from "fs";
 const memberService = {
   findAllMembers: async () => {
     const members = await prisma.member.findMany({
@@ -68,6 +69,7 @@ const memberService = {
       },
     });
     if (!member) throw new Error("Error registering members!");
+    
     return member;
   },
   update: async function (body: IMember) {

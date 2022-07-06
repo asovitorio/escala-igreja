@@ -7,10 +7,11 @@
     "build": "tsc",
     "start": "node ./dist/server.js",
     "dev": "ts-node-dev --inspect --transpile-only --ignore node_modules ./src/server.ts",
-    "db":"yarn prisma studio"
+    "db": "yarn prisma studio"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/multer": "^1.4.7",
     "@types/node": "^17.0.23",
     "prisma": "^3.11.1",
     "ts-node-dev": "^1.1.8",
@@ -20,7 +21,12 @@
     "@prisma/client": "^3.11.1",
     "@types/bcrypt": "^5.0.0",
     "bcrypt": "^5.0.1",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3"
+    "cloudinary": "^1.30.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.17.3",
+    "google-drive-image-upload": "^1.0.2",
+    "googleapis": "^105.0.0",
+    "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0"
   }
 }
