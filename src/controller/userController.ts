@@ -12,8 +12,8 @@ const userController = {
   },
   show: async (req: Request, res: Response) => {
     try {
-      const users = await userService.findAllUsers();
-      return res.status(200).json(users);
+      const user = await userService.findById(req.params.id);
+      return res.status(200).json(user);
     } catch (error) {
       return res.status(400).json(error);
     }
