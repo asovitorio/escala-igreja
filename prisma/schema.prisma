@@ -24,7 +24,7 @@ model Member {
   tephone   String
   email     String
   status    Boolean    @default(true)
-  file_id String
+  file_id String @unique
   file File @relation(fields: [file_id],references: [id],onDelete: Cascade)
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt

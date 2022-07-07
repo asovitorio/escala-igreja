@@ -5,6 +5,8 @@ const postRoutes = Router()
 
 
 postRoutes.get('/posts',postController.index)
+postRoutes.get('/posts/:id',postController.show)
+postRoutes.post('/posts',postController.create)
 
 
 export  {postRoutes}

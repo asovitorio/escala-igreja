@@ -7,7 +7,11 @@
     "build": "tsc",
     "start": "node ./dist/server.js",
     "dev": "ts-node-dev --inspect --transpile-only --ignore node_modules ./src/server.ts",
-    "db": "yarn prisma studio"
+    "db": "yarn prisma studio",
+    "seed":"ts-node prisma/seed.ts"
+  },
+  "prisma":{
+    "seed":"ts-node prisma/seed.ts"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
