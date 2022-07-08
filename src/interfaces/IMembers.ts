@@ -4,7 +4,8 @@ export interface IMember{
     telephone:string;
     email:string;
     path:string;
-    status?:boolean
+    status?:boolean;
+    id_file_google:string
 }
 export interface IMembers{
    members:Array<IMember>

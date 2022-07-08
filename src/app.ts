@@ -6,6 +6,7 @@ import { postRoutes } from './routes/post.routes';
 import { taskRoutes } from './routes/task.routes';
 import bodyParser from "body-parser"
 import path from 'path';
+import { scheduleRoutes } from './routes/schedule.routes';
 dotenv.config();
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(`/${baseUrl}`,userRoutes)
 app.use(`/${baseUrl}`,membersRoutes)
 app.use(`/${baseUrl}`,postRoutes)
 app.use(`/${baseUrl}`,taskRoutes)
+app.use(`/${baseUrl}`,scheduleRoutes)
 app.get('/',(req,res) =>{
     res.send({api:'esta api está funcionando corretamente!'})
 })

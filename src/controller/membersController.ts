@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { memberService } from "../services/member.service";
-import { generatePublicUrl, uploadFile } from "../uploads/google";
+import {
+  generatePublicUrl,
+  uploadFile,
+  deleteFileGoogle,
+} from "../uploads/google";
 
 const membersController = {
   index: async (req: Request, res: Response) => {
@@ -32,16 +36,17 @@ const membersController = {
         path: req.file?.path,
         size: req.file?.size,
       };
-      const fileId = await uploadFile(file)
+      const fileId = await uploadFile(file);
       const avatarLink = await generatePublicUrl(String(fileId));
 
-     const body ={
-      ...req.body,
-      path:avatarLink,
-      status:true
-     }
-      
-     const member = await memberService.create(body)
+      const body = {
+        ...req.body,
+        path: avatarLink,
+        status: true,
+        id_file_google: fileId,
+      };
+
+      const member = await memberService.create(body);
 
       return res.status(201).json(member);
     } catch (error) {
@@ -59,6 +64,7 @@ const membersController = {
   delete: async (req: Request, res: Response) => {
     try {
       const member = await memberService.delete(req.body.id);
+      await deleteFileGoogle(String(member.memberDelete.id_file_google));
       return res.status(200).json(member);
     } catch (error) {
       if (error instanceof Error) return res.status(400).json(error.message);

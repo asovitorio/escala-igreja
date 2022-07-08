@@ -11,25 +11,28 @@ datasource db {
 }
 
 model File {
-  id String @id @default(uuid())
-  path String 
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  file Member?
+  id        String   @id @default(uuid())
+  path      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  file      Member?
+
   @@map("files")
 }
+
 model Member {
-  id        String     @id @default(uuid())
-  name      String
-  tephone   String
-  email     String
-  status    Boolean    @default(true)
-  file_id String @unique
-  file File @relation(fields: [file_id],references: [id],onDelete: Cascade)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  user      User?
-  post      Schedule[]
+  id             String     @id @default(uuid())
+  name           String
+  tephone        String
+  email          String
+  status         Boolean    @default(true)
+  id_file_google String?
+  file_id        String     @unique
+  file           File       @relation(fields: [file_id], references: [id], onDelete: Cascade)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  user           User?
+  post           Schedule[]
 
   @@map("members")
 }
@@ -53,7 +56,7 @@ model Post {
   description String     @db.Text
   initials    String
   member      Schedule[]
- task        Task[]
+  task        Task[]
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 
@@ -74,6 +77,7 @@ model Task {
 model Schedule {
   id         String   @id @default(uuid())
   data       DateTime
+  note       String
   member_id  String
   member     Member   @relation(fields: [member_id], references: [id], onDelete: Cascade)
   post_id    String

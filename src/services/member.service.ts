@@ -61,6 +61,7 @@ const memberService = {
         name: body.name,
         email: body.email,
         tephone: body.telephone,
+        id_file_google:body.id_file_google,
         file: {
           create: {
             path: body.path,
