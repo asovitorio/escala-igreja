@@ -6,7 +6,6 @@ const scheduleService = {
     const schedules = await prisma.schedule.findMany({
       select: {
         id: true,
-        data: true,
         note: true,
         member: {
           select: {
@@ -40,10 +39,11 @@ const scheduleService = {
   async create(body: ISchedule) {
     const schedule = await prisma.schedule.create({
       data: {
-        data: body.data, //"YYYY-MM-DDTHH:MM:SS.MMMZ"
+        //"YYYY-MM-DDTHH:MM:SS.MMMZ"
         note: body.note,
         member_id: body.member_id,
         post_id: body.post_id,
+        scale_id:body.scale_id,
         assignedBy: body.assignedBy,
       },
     });

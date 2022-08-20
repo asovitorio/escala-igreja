@@ -36,14 +36,15 @@ const membersController = {
         path: req.file?.path,
         size: req.file?.size,
       };
-      const fileId = await uploadFile(file);
-      const avatarLink = await generatePublicUrl(String(fileId));
+      // const fileId = await uploadFile(file);
+      // const avatarLink = await generatePublicUrl(String(fileId));
+    
 
       const body = {
         ...req.body,
-        path: avatarLink,
+        path: `http://localhost:3000/img/${file.filename}`,
         status: true,
-        id_file_google: fileId,
+        id_file_google: `${file.filename}`,
       };
 
       const member = await memberService.create(body);

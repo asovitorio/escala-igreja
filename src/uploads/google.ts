@@ -25,7 +25,10 @@ const oauth2Client = new google.auth.OAuth2(
   REDIRECT_URI
 );
 
-oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+const tokens = async () =>  (await oauth2Client.refreshAccessToken()).credentials.refresh_token
+console.log("testetestet");
+
+oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN});
 
 const filePath = path.join("src", "uploads", "img");
 

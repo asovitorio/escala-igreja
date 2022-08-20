@@ -7,7 +7,7 @@ const scheduleController = {
         const schedules = await scheduleService.index();
       return res.status(200).json(schedules);
     } catch (error) {
-      if (error instanceof Error) return res.status(400).json(error);
+      if (error instanceof Error) return res.status(400).json(error.message);
     }
   },
   create: async (req: Request, res: Response) => {
@@ -15,7 +15,7 @@ const scheduleController = {
       const schedule = await scheduleService.create(req.body);
       return res.status(200).json(schedule);
     } catch (error) {
-      if (error instanceof Error) return res.status(400).json(error);
+      if (error instanceof Error) return res.status(400).json(error.message);
     }
   },
 };
