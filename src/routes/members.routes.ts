@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import { membersController } from '../controller/membersController'
-import { upload } from '../uploads/multer';
+import { upload } from '../middleware/multer';
 
 
 

@@ -4,7 +4,8 @@ import { scaleService } from "../services/scale.service";
 const scaleController = {
   index: async (req: Request, res: Response) => {
     try {
-      return res.status(200).json({ msg: "teste" });
+      const scales = await scaleService.index()
+      return res.status(200).json(scales);
     } catch (error) {
         if(error instanceof Error)
       return res.status(400).json(error.message);
@@ -12,7 +13,9 @@ const scaleController = {
   },
   show: async (req: Request, res: Response) => {
     try {
-      return res.status(200).json({ msg: "teste" });
+      const {id} = req.params
+      const scale = await scaleService.findById(id)
+      return res.status(200).json(scale);
     } catch (error) {
         if(error instanceof Error)
       return res.status(400).json(error.message);
